@@ -3,6 +3,7 @@ import { projects , moreProject} from "../../data/index";
 import { PinContainer } from './ui/PinContainer';
 import { FaLocationArrow } from 'react-icons/fa6';
 import MagicButton from './ui/MagicButton';
+import Image from 'next/image';
 
 const RecentProjects = () => {
     return (
@@ -32,7 +33,7 @@ const RecentProjects = () => {
                                             style={{
                                                 transform: `translateX(-${5 * index * 2}px)`
                                             }}>
-                                            <img src={icon} alt={icon} className='p-2' />
+                                            <Image width={50} height={50} src={icon} alt={icon} className='p-2' />
                                         </div>
                                     ))}
                                 </div>
