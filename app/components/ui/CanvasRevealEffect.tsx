@@ -276,7 +276,7 @@ const ShaderMaterial = ({
     });
 
     return materialObject;
-  }, [source , getUniforms]); // Removed size.width and size.height
+  }, [source, getUniforms]); // Removed size.width and size.height
 
 
   return (
@@ -288,20 +288,15 @@ const ShaderMaterial = ({
 };
 
 
-const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
+const Shader: React.FC<{
+  source: string;
+  uniforms: Uniforms;
+  maxFps?: number;
+}> = ({ source, uniforms, maxFps }) => {
   return (
-    <Canvas className="absolute inset-0  h-full w-full">
+    <Canvas>
       <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
     </Canvas>
   );
 };
-interface ShaderProps {
-  source: string;
-  uniforms: {
-    [key: string]: {
-      value: number[] | number[][] | number;
-      type: string;
-    };
-  };
-  maxFps?: number;
-}
+

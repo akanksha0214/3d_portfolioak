@@ -4,6 +4,11 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
+// Define the 'Uniforms' type
+type Uniforms = {
+  [uniform: string]: THREE.IUniform<any>;  // Use the correct typing for THREE.IUniform
+};
+
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
   opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
@@ -32,12 +37,12 @@ export const CanvasRevealEffect = ({
           opacities={
             opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
           }
-          shader={`
-              float animation_speed_factor = ${animationSpeed.toFixed(1)};
+          shader={`float animation_speed_factor = ${animationSpeed.toFixed(
+            1
+          )}; 
               float intro_offset = distance(u_resolution / 2.0 / u_total_size, st2) * 0.01 + (random(st2) * 0.15);
               opacity *= step(intro_offset, u_time * animation_speed_factor);
-              opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
-            `}
+              opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);`}
           center={["x", "y"]}
         />
       </div>
@@ -65,7 +70,7 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
   shader = "",
   center = ["x", "y"],
 }) => {
-  const uniforms = React.useMemo(() => {
+  const uniforms = useMemo(() => {
     let colorsArray = [
       colors[0],
       colors[0],
@@ -119,7 +124,7 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
   }, [colors, opacities, totalSize, dotSize]);
 
   return (
-    <Shader
+    <ShaderMaterial
       source={`
         precision mediump float;
         in vec2 fragCoord;
@@ -142,12 +147,10 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
             vec2 st = fragCoord.xy;
             ${center.includes("x")
           ? "st.x -= abs(floor((mod(u_resolution.x, u_total_size) - u_dot_size) * 0.5));"
-          : ""
-        }
+          : ""}
             ${center.includes("y")
           ? "st.y -= abs(floor((mod(u_resolution.y, u_total_size) - u_dot_size) * 0.5));"
-          : ""
-        }
+          : ""}
       float opacity = step(0.0, st.x);
       opacity *= step(0.0, st.y);
 
@@ -173,19 +176,14 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
   );
 };
 
-type Uniforms = {
-  [uniform: string]: THREE.IUniform;
-};
-
 const ShaderMaterial = ({
   source,
   uniforms,
   maxFps = 60,
 }: {
   source: string;
-  hovered?: boolean;
+  uniforms: Uniforms;  // Use the Uniforms type here
   maxFps?: number;
-  uniforms: Uniforms;
 }) => {
   const { size } = useThree();
   const ref = useRef<THREE.Mesh>(null);
@@ -241,21 +239,4 @@ const ShaderMaterial = ({
   );
 };
 
-
-const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
-  return (
-    <Canvas className="absolute inset-0  h-full w-full">
-      <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
-    </Canvas>
-  );
-};
-interface ShaderProps {
-  source: string;
-  uniforms: {
-    [key: string]: {
-      value: number[] | number[][] | number;
-      type: string;
-    };
-  };
-  maxFps?: number;
-}
+export default ShaderMaterial;

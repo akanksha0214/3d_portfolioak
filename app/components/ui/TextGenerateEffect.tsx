@@ -31,7 +31,7 @@ export const TextGenerateEffect = ({
         }
       );
     }
-  }, [animate, filter, duration]); // Include animate, filter, and duration in the dependency array
+  }, [scope,animate, filter, duration]); // Include animate, filter, and duration in the dependency array
 
   const renderWords = () => {
     return (
