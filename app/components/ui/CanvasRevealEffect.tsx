@@ -276,7 +276,8 @@ const ShaderMaterial = ({
     });
 
     return materialObject;
-  }, [size.width, size.height, source]);
+  }, [source]); // Removed size.width and size.height
+
 
   return (
     <mesh ref={ref}>
