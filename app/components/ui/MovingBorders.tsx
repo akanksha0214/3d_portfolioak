@@ -10,35 +10,39 @@ import {
 import { useRef } from "react";
 import { cn } from "@/utils/cn";
 
-export function Button({
+// Define ButtonProps as a generic to handle the 'as' prop type inference
+type ButtonProps<C extends React.ElementType> = {
+  borderRadius?: string;
+  children: React.ReactNode;
+  as?: C;
+  containerClassName?: string;
+  borderClassName?: string;
+  duration?: number;
+  className?: string;
+} & React.ComponentPropsWithRef<C>; // Use ComponentPropsWithRef for dynamic component props
+
+export function Button<C extends React.ElementType = "button">({
   borderRadius = "1.75rem",
   children,
-  as: Component = "button",
+  as,
   containerClassName,
   borderClassName,
   duration,
   className,
   ...otherProps
-}: {
-  borderRadius?: string;
-  children: React.ReactNode;
-  as?: React.ElementType;
-  containerClassName?: string;
-  borderClassName?: string;
-  duration?: number;
-  className?: string;
-  [key: string]: unknown;
-} & React.ComponentPropsWithoutRef<typeof Component>) {
+}: ButtonProps<C>) {
+  const Component = as || "button"; // Default to "button" if as is undefined
+
   return (
     <Component
       className={cn(
-        "bg-transparent relative text-xl p-[1px] overflow-hidden md:col-span-2 ",
+        "bg-transparent relative text-xl p-[1px] overflow-hidden md:col-span-2",
         containerClassName
       )}
       style={{
         borderRadius: borderRadius,
       }}
-      {...otherProps}
+      {...otherProps} // Ensure props are spread correctly
     >
       <div
         className="absolute inset-0"
@@ -61,7 +65,6 @@ export function Button({
         )}
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
-
         }}
       >
         {children}

@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/utils/cn";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef ,useCallback} from "react";
 import * as THREE from "three";
 
 export const CanvasRevealEffect = ({
@@ -207,12 +207,12 @@ const ShaderMaterial = ({
     timeLocation.value = timestamp;
   });
 
-  const getUniforms = () => {
+  const getUniforms = useCallback(() => {
     const preparedUniforms: { [key: string]: THREE.IUniform } = {};
-
+  
     for (const uniformName in uniforms) {
       const uniform = uniforms[uniformName];
-
+  
       switch (uniform.type) {
         case "uniform1f":
           preparedUniforms[uniformName] = { value: uniform.value as number };
@@ -242,15 +242,15 @@ const ShaderMaterial = ({
           break;
       }
     }
-
+  
     preparedUniforms["u_time"] = { value: 0 };
     preparedUniforms["u_resolution"] = {
       value: new THREE.Vector2(size.width * 2, size.height * 2),
-    }; // Initialize u_resolution
-
+    };
+  
     return preparedUniforms;
-  };
-
+  }, [uniforms]);
+  
   // Shader material
   const material = useMemo(() => {
     const materialObject = new THREE.ShaderMaterial({
