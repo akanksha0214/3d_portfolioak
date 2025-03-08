@@ -1,13 +1,16 @@
 "use client";
 import { cn } from "@/utils/cn";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-// Define the 'Uniforms' type
 type Uniforms = {
-  [uniform: string]: THREE.IUniform<any>;  // Use the correct typing for THREE.IUniform
+  u_colors: THREE.Uniform<THREE.Vector3[]>;  // Colors as array of THREE.Vector3
+  u_opacities: THREE.Uniform<number[]>;  // Opacities as array of numbers
+  u_total_size: THREE.Uniform<number>;  // Total size as a number
+  u_dot_size: THREE.Uniform<number>;  // Dot size as a number
 };
+
 
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
@@ -79,6 +82,7 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
       colors[0],
       colors[0],
     ];
+  
     if (colors.length === 2) {
       colorsArray = [
         colors[0],
@@ -98,30 +102,21 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
         colors[2],
       ];
     }
-
+  
+    const colorVectors = colorsArray.map(
+      (color) => new THREE.Vector3(color[0] / 255, color[1] / 255, color[2] / 255)
+    );
+  
     return {
-      u_colors: {
-        value: colorsArray.map((color) => [
-          color[0] / 255,
-          color[1] / 255,
-          color[2] / 255,
-        ]),
-        type: "uniform3fv",
-      },
-      u_opacities: {
-        value: opacities,
-        type: "uniform1fv",
-      },
-      u_total_size: {
-        value: totalSize,
-        type: "uniform1f",
-      },
-      u_dot_size: {
-        value: dotSize,
-        type: "uniform1f",
-      },
+      u_colors: new THREE.Uniform(colorVectors),       // Use THREE.Uniform for vec3 array
+      u_opacities: new THREE.Uniform(opacities),       // Use THREE.Uniform for float array
+      u_total_size: new THREE.Uniform(totalSize),      // Use THREE.Uniform for float
+      u_dot_size: new THREE.Uniform(dotSize),          // Use THREE.Uniform for float
+      
     };
   }, [colors, opacities, totalSize, dotSize]);
+  
+
 
   return (
     <ShaderMaterial

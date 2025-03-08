@@ -33,7 +33,7 @@ const Approach = () => {
                     />
 
                 </Card>
-                <Card title="Learning, leading, and innovating" description="I’m all about mastering new tech, taking on leadership roles (even if it’s just organizing the snack drawer), and working on projects that make a difference. 
+                <Card title="Learning, leading, and innovating" description="I’m all about mastering new tech, taking on leadership roles , and working on projects that make a difference. 
                 My goal? To be a developer who not only writes code but also inspires teams to create awesome solutions." icon={<AceternityIcon order="My vision" />}>
                     <CanvasRevealEffect
                         animationSpeed={3}

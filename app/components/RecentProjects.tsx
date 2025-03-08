@@ -1,5 +1,5 @@
 import React from 'react';
-import { projects , moreProject} from "../../data/index";
+import { projects, moreProject } from "../../data/index";
 import { PinContainer } from './ui/PinContainer';
 import { FaLocationArrow } from 'react-icons/fa6';
 import MagicButton from './ui/MagicButton';
@@ -20,7 +20,8 @@ const RecentProjects = () => {
                                 {/* <div className='relative w-full h-full overflow-hidden lg:rounded-3xl bg-[#13162d]'>
                                     <img src='./bg.png' alt='bg-img' />
                                 </div> */}
-                                <img src={img}
+                                <Image src={img}
+                                    width={1000} height={500}
                                     alt={title}
                                     className='z-10 absolute bottom-0' />
                             </div>
