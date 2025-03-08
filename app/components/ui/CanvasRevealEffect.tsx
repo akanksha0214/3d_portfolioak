@@ -276,7 +276,7 @@ const ShaderMaterial = ({
     });
 
     return materialObject;
-  }, [source]); // Removed size.width and size.height
+  }, [source , getUniforms]); // Removed size.width and size.height
 
 
   return (
