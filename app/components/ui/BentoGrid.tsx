@@ -111,19 +111,21 @@ export const BentoGridItem = ({
             } `}
         >
           {spareImg && (
-            <img
+            <Image
               src={spareImg}
               alt={spareImg}
               width={220}
-              className="object-cover object-center w-full h-full"
+              height={70}
+              className={cn(imgClassName, "object-cover object-center ")}
             />
+
           )}
         </div>
         {id === 6 && (
           // add background animation , remove the p tag
-         
-            <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
-         
+
+          <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
+
         )}
 
         <div

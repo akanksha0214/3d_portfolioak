@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/utils/cn";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -229,7 +229,7 @@ const ShaderMaterial = ({
     });
 
     return materialObject;
-  }, [size.width, size.height, source, uniforms]);
+  }, [source, uniforms]);
 
   return (
     <mesh ref={ref}>
