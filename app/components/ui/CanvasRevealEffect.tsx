@@ -249,7 +249,7 @@ const ShaderMaterial = ({
     };
   
     return preparedUniforms;
-  }, [uniforms]);
+  }, [uniforms,size.height,size.width]);
   
   // Shader material
   const material = useMemo(() => {
