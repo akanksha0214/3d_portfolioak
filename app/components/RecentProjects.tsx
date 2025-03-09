@@ -1,7 +1,7 @@
 import React from 'react';
 import { projects, moreProject } from "../../data/index";
 import { PinContainer } from './ui/PinContainer';
-import { FaLocationArrow } from 'react-icons/fa6';
+import { FaLocationArrow } from 'react-icons/fa';
 import MagicButton from './ui/MagicButton';
 import Image from 'next/image';
 
@@ -38,10 +38,6 @@ const RecentProjects = () => {
                                         </div>
                                     ))}
                                 </div>
-                                {/* <div className='flex justify-center items-center'>
-                                    <p className='flex lg:text-xl md:text-xs text-sm text-purple'>Check Live Site</p>
-                                    <FaLocationArrow className='ms-3' color='#CBACF9' />
-                                </div> */}
                             </div>
 
                         </PinContainer>
