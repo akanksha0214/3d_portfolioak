@@ -1,5 +1,3 @@
-import { link } from "fs";
-import { title } from "process";
 
 export const navItems = [
   { name: "About", link: "#about" ,id:"1"},
