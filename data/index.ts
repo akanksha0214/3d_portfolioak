@@ -50,8 +50,17 @@ export const gridItems = [
 
   {
     id: 5,
-    title: "Currently learning new tech",
-    description: "The Inside Scoop",
+    title: "My Skills include",
+    description: [
+      "ReactJs",
+      "JavaScript",
+      "BootStrap",
+      "HTML5",
+      "CSS3",
+      "API",
+      "Figma",
+      "SaaS",
+    ],
     className: "md:col-span-3 md:row-span-2",
     imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
     titleClassName: "justify-center md:justify-start lg:justify-center",
