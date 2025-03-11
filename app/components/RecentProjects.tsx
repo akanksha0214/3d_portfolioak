@@ -24,7 +24,8 @@ const RecentProjects = () => {
                                 <Image src={img}
                                     width={1000} height={500}
                                     alt={title}
-                                    className='z-10 absolute bottom-0' />
+                                    className='z-10 absolute bottom-0'
+                                    style={{ height: 'auto' }} />
                             </div>
                             <h1 className='text-purple font-bold lg:text-2xl md:text-xl text-base line-clamp-1'>{title}</h1>
                             <p className='lg:text-xl lg:font-normal font-light text-sm line-clamp-2'>{des}</p>
@@ -35,7 +36,7 @@ const RecentProjects = () => {
                                             style={{
                                                 transform: `translateX(-${5 * index * 2}px)`
                                             }}>
-                                            <Image width={50} height={50} src={icon} alt={icon} className='p-2' />
+                                            <Image width={50} height={50} src={icon} alt={icon} className='p-2' style={{ height: 'auto' }} />
                                         </div>
                                     ))}
                                 </div>
@@ -62,3 +63,7 @@ const RecentProjects = () => {
 }
 
 export default RecentProjects;
+
+
+
+

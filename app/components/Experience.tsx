@@ -25,6 +25,7 @@ const Experience = () => {
                                     width={150} // You can adjust the width based on your design
                                     height={150} // Adjust the height accordingly
                                     className="lg:w-32 md:w-20 w-16"
+                                    style={{ height: 'auto' }}
                                 />
 
                             </div>

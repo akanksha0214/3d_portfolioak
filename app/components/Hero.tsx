@@ -6,6 +6,10 @@ import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 
 const Hero = () => {
+
+ 
+
+  
   return (
     <div className="pb-20 pt-36">
       {/**
