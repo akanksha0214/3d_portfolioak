@@ -110,7 +110,7 @@ export const BentoGridItem = ({
           className={`absolute right-0 -bottom-5 ${id === 5 && "w-full opacity-80"
             } `}
         >
-          {/* {spareImg && (
+          {spareImg && (
             <Image
               src={spareImg}
               alt={spareImg}
@@ -119,7 +119,7 @@ export const BentoGridItem = ({
               className={cn(imgClassName, "object-cover object-center ")}
             />
 
-          )} */}
+          )}
         </div>
         {id === 6 && (
           // add background animation , remove the p tag
