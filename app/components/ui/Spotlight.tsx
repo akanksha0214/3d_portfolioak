@@ -1,5 +1,6 @@
+"use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { cn } from "@/utils/cn";
 
 type SpotlightProps = {
@@ -8,10 +9,21 @@ type SpotlightProps = {
 };
 
 export const Spotlight = ({ className, fill }: SpotlightProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Ensure the component is mounted on the client side
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <svg
       className={cn(
-        "animate-spotlight pointer-events-none absolute z-[1]  h-[169%] w-[138%] lg:w-[84%] opacity-0",
+        "animate-spotlight pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%] opacity-0",
         className
       )}
       xmlns="http://www.w3.org/2000/svg"

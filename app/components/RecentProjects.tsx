@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { projects, moreProject } from "../../data/index";
 import { PinContainer } from './ui/PinContainer';
@@ -45,10 +46,15 @@ const RecentProjects = () => {
                 ))}
                 <div className="flex flex-col md:flex-row gap-4">
                     {moreProject.map((project) => (
-                        <a key={project.id} href={project.link} target="_blank" rel="noopener noreferrer">
+                        <div
+                            key={project.id}
+                            className="cursor-pointer"
+                            onClick={() => window.open(project.link, "_blank")}
+                        >
                             <MagicButton title={project.title} icon={<FaLocationArrow />} position="left" />
-                        </a>
+                        </div>
                     ))}
+
                 </div>
             </div>
         </div>
